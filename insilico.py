@@ -14,7 +14,6 @@ import itertools
 import warnings
 import time
 
-
 ''' Imported packages from scikit-learn '''
 from sklearn.cross_validation import train_test_split 
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
@@ -31,7 +30,6 @@ from sklearn.grid_search import GridSearchCV
 from os import listdir
 from scipy.stats.mstats import chisquare
 from scipy.stats import ks_2samp
-
 
 plt.style.use('ggplot') #Plotting style for matplotlib
 warnings.simplefilter(action = "ignore", category = FutureWarning) #Do not display futurewarnings
@@ -96,15 +94,6 @@ def return_roc_auc_score(y_true, y_scores):
 def return_accuracy_score(y_true, y_pred): 
     return metrics.accuracy_score(y_true, y_pred)
     
-''' Perform Isolation Forest '''
-def perform_IF(df): 
-    features = get_features(df)
-    IF = IsolationForest(n_estimators = 100, max_samples = 2000, contamination = 0.10, bootstrap = False, random_state = 253)
-    IF.fit(df[features])
-    df['outlier'] = IF.predict(df[features])
-    return df
-    
-    
 ''' Perform LDA '''
 def perform_lda(x_train, x_test, y_train): 
     lda = LinearDiscriminantAnalysis(solver = 'lsqr')
@@ -118,12 +107,6 @@ def perform_RF(x_train, x_test, y_train):
     #std_fi = np.std([tree.feature_importances_ for tree in rf.estimators_], axis=0)
     #plot_feature_importances(features, rf.feature_importances_, std_fi)
     return rf.predict(x_test), rf.predict_proba(x_test)[:,1]
-    
-''' Perform Stochastic Gradient Boosting '''    
-def perform_SGB(x_train, x_test, y_train): 
-    sgb = GradientBoostingClassifier(n_estimators = 200, learning_rate = 0.1, subsample = 0.5, max_depth = 3)
-    sgb.fit(x_train, y_train)
-    return sgb.predict(x_test)
     
 ''' Check performance on a held-out test set for all possible combinations when S=2 '''
 'Input: list of datafile names (filenames), list of species names (list_species), number of cells to sample (n_sample), number of replicates (n_rep)'
