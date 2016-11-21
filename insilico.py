@@ -5,13 +5,6 @@ Created on Mon Oct  3 17:37:37 2016
 @author: prubbens
 """
 
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Aug 29 17:23:13 2016
-
-@author: prubbens
-"""
-
 ''' Imported packages for python ''' 
 import numpy as np
 import pandas as pd
