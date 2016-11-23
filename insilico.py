@@ -38,7 +38,7 @@ start_time = time.time() #Start stopwatch to determine runtime
 ##############################################################################
 
 ''' Put species names in an excel sheet to later on annotate in silico communities '''
-path = 'Data030316_Mocks_SingleSpecies_Filter_CSV/'
+path = 'DataInsilicoPopulations/'
 datalist_singlespecies = sorted(listdir(path)) 
 list_species = pd.read_csv('mock.expected.composition.csv', index_col = 0, header = 0 )
 list_species = list_species.index.tolist()
