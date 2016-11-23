@@ -5,10 +5,10 @@ synthetic bacterial communities*".
 
 ## Dependencies
 InSilicoFlow depends on the following packages: 
-- [Python 3](https://www.python.org/)(version )
-- [numpy](http://www.numpy.org/)(version )
-- [scikit-learn](http://scikit-learn.org/stable/)(version )
-- [pandas](http://pandas.pydata.org/)(version )
+- [Python 3](https://www.python.org/) (version )
+- [numpy](http://www.numpy.org/) (version )
+- [scikit-learn](http://scikit-learn.org/stable/) (version )
+- [pandas](http://pandas.pydata.org/) (version )
 
 
 ## fcstocsv.py
