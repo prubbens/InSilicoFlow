@@ -18,9 +18,18 @@ from sklearn.grid_search import GridSearchCV
 plt.style.use('ggplot')
 from os import listdir
 
-''' Read-in metadata '''
+'''
+Read-in metadata: 
+This data is our expected outcome concerning the in vitro communities in the abundance gradient 
+'''
 targetabundances = pd.read_excel('targetabundances.xlsx', index_col = 'File')
 
+'''
+Return path of microbial community of interest: 
+comb == 0: Pseudomonas putida -- Pseudomonas fluorescens (initial low performance)
+comb == 1: Agrobacter rhizogenes -- Janthinobacterium sp. B3 (initial medium performance)
+comb == 2: Shewanella oneidensis -- Micrococcus luteus (initial high performance)
+'''
 def get_path(comb): 
     if comb == 0: 
         path_insilico = 'PC_filtered_1_11/' 
@@ -38,6 +47,9 @@ def get_path(comb):
     nrep_invitro = 3
     return path_insilico, nrep_insilico, path_invitro, nrep_invitro
 
+'''
+Get features (FL1-A/H, FL2-A/H, FL3-A/H, FL4-A/H, FSC-A/H, SSC-A/H)
+'''
 def get_features(df): 
     features = list(df.columns)
     if(len(features) == 15): 
@@ -46,9 +58,12 @@ def get_features(df):
     features.remove('Width')
     return features    
     
-''' Return Artificially Created Mock '''
 ''' 
-Get in-silico mock from axenic cultures
+Return in silico community containing two bacterial populations: 
+datalist: list of filenames containing individual bacterial populations
+n_subsample: number of cells to sample per bacterial population
+path: path to directory
+nrep: number of replicates
 '''    
 def get_insilico_comm(datalist, n_subsample, path, nrep): 
     df0 = pd.DataFrame()
@@ -65,26 +80,38 @@ def get_insilico_comm(datalist, n_subsample, path, nrep):
     df1 = df1.sample(n_subsample, random_state = 1503, replace = False)
     df = pd.concat([df0, df1], axis = 0, ignore_index = True)
     return df
-    
-def get_insilico_comm_abun(datalist, n_subsample, abun, path, nrep): 
+
+''' 
+Return in silico community containing two bacterial populations: 
+datalist: list of filenames containing individual bacterial populations
+n_sample: number of cells to sample per bacterial population
+path: path to directory
+nrep: number of replicates
+''' 
+def get_insilico_comm_abun(datalist, n_sample, abun, path, nrep): 
     df0 = pd.DataFrame()
     df1 = pd.DataFrame()
     for i in np.arange(0, nrep):        
         df_singlespecies = pd.read_csv(path + datalist[i], index_col = 0)
         df_singlespecies['species'] = 0
         df0 = pd.concat([df0,df_singlespecies], axis = 0, ignore_index = True)
-    df0 = df0.sample(int(n_subsample*abun), random_state = 27, replace = False)
+    df0 = df0.sample(int(n_sample*abun), random_state = 27, replace = False)
     for j in np.arange(nrep, 2*nrep): 
         df_singlespecies = pd.read_csv(path + datalist[j], index_col = 0)
         df_singlespecies['species'] = 1
         df1 = pd.concat([df1,df_singlespecies], axis = 0, ignore_index = True)  
-    df1 = df1.sample(int(n_subsample*(1.-abun)), random_state = 633, replace = False)
+    df1 = df1.sample(int(n_sample*(1.-abun)), random_state = 633, replace = False)
     df = pd.concat([df0, df1], axis = 0, ignore_index = True)
     return df
     
-''' Return Biologically Created Mock '''
-    
-''' Pool replicates before sampling synthetic community '''
+''' 
+Sample cells of synthetic bacterial community 
+idx: 0 or 1 (first or second bacterial population)
+datalist: list of filenames containing synthetic communities
+n_sample: number of cells to sample per invitro community
+path: path to directory
+nrep: number of replicates
+''' 
 def get_invitro_comm(idx, datalist, n_sample, path, nrep): 
     df = pd.DataFrame()
     for i in np.arange(int(idx*nrep), int((idx+1)*nrep)): 
@@ -94,7 +121,11 @@ def get_invitro_comm(idx, datalist, n_sample, path, nrep):
         df = df.sample(n_sample, random_state = 5495, replace = False)
     return df
     
-''' Calculate relative abundance p and diversity parameters D1 and D2 '''
+''' 
+Calculate relative abundance p and alpha diversity parameters D1 and D2 
+cluster: array of cell labels
+n_clust: number of different 
+'''
 def calc_D1_D2(cluster, n_clust):
     cluster = pd.DataFrame(cluster)
     cluster.columns = ['clust']
@@ -111,14 +142,18 @@ def calc_D1_D2(cluster, n_clust):
             pp = p
     return pp, np.exp(-1.*p_d1), 1./p_d2 
 
-''' Return binned data '''
-''' Split Artificial Mock into a training and validation/test set '''    
-def get_train_test(art_mock): 
-    features = list(art_mock.columns)
-    art_x_train, art_x_test, art_y_train, art_y_test = train_test_split(art_mock[features[0:12]], art_mock['species'], test_size = 0.3, random_state = 588)
+''' Split in silico community into a training and validation/test set '''    
+def get_train_test(df): 
+    features = list(df.columns)
+    art_x_train, art_x_test, art_y_train, art_y_test = train_test_split(df[features[0:12]], df['species'], test_size = 0.3, random_state = 588)
     return art_x_train, art_x_test, art_y_train, art_y_test
     
-''' Perform LDA '''
+''' 
+Train Linear Discriminant analysis on training set and evaluate on test set: 
+x_train: training set
+y_train: labels of training set
+x_test: test
+'''
 def perform_lda(x_train, x_test, y_train): 
     lda = LinearDiscriminantAnalysis(solver = 'lsqr')
     lda.fit(x_train, y_train)
@@ -226,7 +261,6 @@ def perform_invitro_analysis(datalist_insilico, datalist_invitro, Nax, Ninvitro,
     dfresult['Target abundances'] = targetabundances
     dfresult.to_csv('dfinvitro.csv')
     return dfresult
-
 
 Nax = 5000
 Ncomm = 10000
