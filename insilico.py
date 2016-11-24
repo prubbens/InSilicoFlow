@@ -5,13 +5,6 @@ Created on Mon Oct  3 17:37:37 2016
 @author: prubbens
 """
 
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Aug 29 17:23:13 2016
-
-@author: prubbens
-"""
-
 ''' Imported packages for python ''' 
 import numpy as np
 import pandas as pd
@@ -20,7 +13,6 @@ import pylab as plt
 import itertools
 import warnings
 import time
-
 
 ''' Imported packages from scikit-learn '''
 from sklearn.cross_validation import train_test_split 
@@ -39,7 +31,6 @@ from os import listdir
 #from scipy.stats.mstats import chisquare
 #from scipy.stats import ks_2samp
 
-
 plt.style.use('ggplot') #Plotting style for matplotlib
 warnings.simplefilter(action = "ignore", category = FutureWarning) #Do not display futurewarnings
 start_time = time.time() #Start stopwatch to determine runtime
@@ -47,7 +38,11 @@ start_time = time.time() #Start stopwatch to determine runtime
 ##############################################################################
 
 ''' Put species names in an excel sheet to later on annotate in silico communities '''
+<<<<<<< HEAD
 path = 'DataInsilicoComm/'
+=======
+path = 'DataInsilicoPopulations/'
+>>>>>>> fbb81f7d334d900de71ca37c355eb1ed69cc4d76
 datalist_singlespecies = sorted(listdir(path)) 
 list_species = pd.read_excel('listspecies.xlsx', index_col = 0, header = 0 )
 list_species = list_species.index.tolist()
@@ -96,7 +91,11 @@ def return_roc_auc_score(y_true, y_scores):
 ''' Calculate accuracy '''
 def return_accuracy_score(y_true, y_pred): 
     return metrics.accuracy_score(y_true, y_pred)
+<<<<<<< HEAD
         
+=======
+    
+>>>>>>> fbb81f7d334d900de71ca37c355eb1ed69cc4d76
 ''' Perform LDA '''
 def perform_lda(x_train, x_test, y_train): 
     lda = LinearDiscriminantAnalysis(solver = 'lsqr')
