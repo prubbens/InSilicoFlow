@@ -36,8 +36,8 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.grid_search import GridSearchCV
 
 from os import listdir
-from scipy.stats.mstats import chisquare
-from scipy.stats import ks_2samp
+#from scipy.stats.mstats import chisquare
+#from scipy.stats import ks_2samp
 
 
 plt.style.use('ggplot') #Plotting style for matplotlib
@@ -47,9 +47,9 @@ start_time = time.time() #Start stopwatch to determine runtime
 ##############################################################################
 
 ''' Put species names in an excel sheet to later on annotate in silico communities '''
-path = 'Data030316_Mocks_SingleSpecies_Filter_CSV/'
+path = 'DataInsilicoComm/'
 datalist_singlespecies = sorted(listdir(path)) 
-list_species = pd.read_csv('mock.expected.composition.csv', index_col = 0, header = 0 )
+list_species = pd.read_excel('listspecies.xlsx', index_col = 0, header = 0 )
 list_species = list_species.index.tolist()
 
 ##############################################################################
@@ -63,12 +63,12 @@ def get_number_of_combinations(N, k):
 ''' Filter out features you don't want to use for your classifier '''
 'Input: pandas dataframe'
 'Output: list of features'
-def get_features(dataframe): 
-    features = list(dataframe.columns)
-    #print(features)
-    features.remove('Time')
+def get_features(df): 
+    features = list(df.columns)
     if(len(features) == 15): 
         features.remove('species')
+    features.remove('Time')
+    features.remove('Width')
     return features
     
 ''' If there are technical replicates, pool them, and subsample a number of cells '''    
@@ -78,13 +78,7 @@ def get_subsample_ax_cul_pool(idx, datalist, n_cell, n_rep, species_id):
     df = pd.DataFrame()    
     for i in np.arange(0, n_rep): 
         df_subsample = pd.read_csv(path + datalist[int(n_rep*idx) + i], index_col = 0)  
-        df_subsample = perform_IF(df_subsample)
-        print(df_subsample[df_subsample.outlier == 1].shape[0]/df_subsample.shape[0])
-        df_subsample = df_subsample[df_subsample.outlier == 1]
         df =  pd.concat([df, df_subsample], axis = 0, ignore_index = True)  
-    df = perform_IF(df)
-    #print(df[df.outlier == 1].shape[0]/df.shape[0])
-    #df = df[df.outlier == 1]
     df_sampled = df.sample(n_cell, random_state = 567, replace = False)
     df_sampled['species'] = species_id
     return df_sampled
@@ -102,16 +96,7 @@ def return_roc_auc_score(y_true, y_scores):
 ''' Calculate accuracy '''
 def return_accuracy_score(y_true, y_pred): 
     return metrics.accuracy_score(y_true, y_pred)
-    
-''' Perform Isolation Forest '''
-def perform_IF(df): 
-    features = get_features(df)
-    IF = IsolationForest(n_estimators = 100, max_samples = 2000, contamination = 0.10, bootstrap = False, random_state = 253)
-    IF.fit(df[features])
-    df['outlier'] = IF.predict(df[features])
-    return df
-    
-    
+        
 ''' Perform LDA '''
 def perform_lda(x_train, x_test, y_train): 
     lda = LinearDiscriminantAnalysis(solver = 'lsqr')
@@ -122,15 +107,7 @@ def perform_lda(x_train, x_test, y_train):
 def perform_RF(x_train, x_test, y_train): 
     rf = RandomForestClassifier(n_estimators = 200, criterion = 'gini')
     rf.fit(x_train, y_train)
-    #std_fi = np.std([tree.feature_importances_ for tree in rf.estimators_], axis=0)
-    #plot_feature_importances(features, rf.feature_importances_, std_fi)
     return rf.predict(x_test), rf.predict_proba(x_test)[:,1]
-    
-''' Perform Stochastic Gradient Boosting '''    
-def perform_SGB(x_train, x_test, y_train): 
-    sgb = GradientBoostingClassifier(n_estimators = 200, learning_rate = 0.1, subsample = 0.5, max_depth = 3)
-    sgb.fit(x_train, y_train)
-    return sgb.predict(x_test)
     
 ''' Check performance on a held-out test set for all possible combinations when S=2 '''
 'Input: list of datafile names (filenames), list of species names (list_species), number of cells to sample (n_sample), number of replicates (n_rep)'
@@ -195,7 +172,7 @@ def get_perf_art_mock_nspecies(filenames, S, n_sample, n_rep):
     #get_ax_cul(idx, n_subsample, datalist)
     return df_meta
     
-df = perform_RF_2species_allcomb(datalist_singlespecies, list_species, 5000, 1)
+df = perform_RF_2species_allcomb(datalist_singlespecies, list_species, 5000, 2)
 #df = get_perf_art_mock_nspecies(datalist_singlespecies, 5, 5000, 2)    
 
 df.to_csv('resultsRF_repA_repIF.csv')
