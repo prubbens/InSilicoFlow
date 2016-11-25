@@ -1,0 +1,191 @@
+,species_i,species_j,accuracy,AUC
+0,Pseudomonas putida,Burkholderia ambifaria,0.844,0.907639373008195
+1,Pseudomonas putida,Shewanella oneidensis,0.885,0.953690085789893
+2,Pseudomonas putida,Cupriavidus necator,0.8596666666666667,0.9266651135328932
+3,Pseudomonas putida,Cupriavidus pinatubonensis,0.726,0.7989726197928523
+4,Pseudomonas putida,Zymomonas mobilis subsp. mobilis,0.913,0.9698139262747552
+5,Pseudomonas putida,Sphingomonas aromaticivorans,0.9223333333333333,0.978171282793649
+6,Pseudomonas putida,Rhizobium radiobacter,0.8403333333333334,0.9088853627219441
+7,Pseudomonas putida,Pseudomonas fluorescens,0.7376666666666667,0.820466109079786
+8,Pseudomonas putida,Lactobacillus plantarum,0.8756666666666667,0.9489722196534259
+9,Pseudomonas putida,Streptococcus salivarius,0.9463333333333334,0.9833137413214204
+10,Pseudomonas putida,Bacillus subtilis,0.88,0.9457873321192807
+11,Pseudomonas putida,Agrobacter rhizogenes,0.807,0.8844532939477578
+12,Pseudomonas putida,Micrococcus luteus,0.956,0.9874909746329388
+13,Pseudomonas putida,Citrobacter freundii,0.8393333333333334,0.9069953708314364
+14,Pseudomonas putida,Enterobacter aerogenes,0.8173333333333334,0.8818768406413613
+15,Pseudomonas putida,Escherichia coli,0.7353333333333333,0.8042097779848623
+16,Pseudomonas putida,Edwardsialla ictaluri,0.8456666666666667,0.9063135777088549
+17,Pseudomonas putida,Klebsiella oxytoca,0.82,0.8969972203647849
+18,Pseudomonas putida,Janthinobacterium sp. strain B3,0.752,0.8359548393751421
+19,Burkholderia ambifaria,Shewanella oneidensis,0.9686666666666667,0.9937760535226496
+20,Burkholderia ambifaria,Cupriavidus necator,0.958,0.9880660639084908
+21,Burkholderia ambifaria,Cupriavidus pinatubonensis,0.861,0.9259081831180287
+22,Burkholderia ambifaria,Zymomonas mobilis subsp. mobilis,0.991,0.995584461430116
+23,Burkholderia ambifaria,Sphingomonas aromaticivorans,0.9896666666666667,0.9982829572615525
+24,Burkholderia ambifaria,Rhizobium radiobacter,0.9683333333333334,0.9908119095720463
+25,Burkholderia ambifaria,Pseudomonas fluorescens,0.9506666666666667,0.9750662008450945
+26,Burkholderia ambifaria,Lactobacillus plantarum,0.938,0.9832290451428409
+27,Burkholderia ambifaria,Streptococcus salivarius,0.9803333333333333,0.9961639966992943
+28,Burkholderia ambifaria,Bacillus subtilis,0.929,0.9830674332745276
+29,Burkholderia ambifaria,Agrobacter rhizogenes,0.9583333333333334,0.9854149179091737
+30,Burkholderia ambifaria,Micrococcus luteus,0.956,0.9939836814249943
+31,Burkholderia ambifaria,Citrobacter freundii,0.6853333333333333,0.748536156598566
+32,Burkholderia ambifaria,Enterobacter aerogenes,0.6373333333333333,0.6940825158633053
+33,Burkholderia ambifaria,Escherichia coli,0.8003333333333333,0.8808493715143411
+34,Burkholderia ambifaria,Edwardsialla ictaluri,0.673,0.7408003499886182
+35,Burkholderia ambifaria,Klebsiella oxytoca,0.8063333333333333,0.8735308214062144
+36,Burkholderia ambifaria,Janthinobacterium sp. strain B3,0.9196666666666666,0.9596588322330982
+37,Shewanella oneidensis,Cupriavidus necator,0.956,0.9912405033576144
+38,Shewanella oneidensis,Cupriavidus pinatubonensis,0.953,0.9871339613447531
+39,Shewanella oneidensis,Zymomonas mobilis subsp. mobilis,0.8523333333333334,0.928854543094127
+40,Shewanella oneidensis,Sphingomonas aromaticivorans,0.9303333333333333,0.9742812606703846
+41,Shewanella oneidensis,Rhizobium radiobacter,0.7476666666666667,0.8236994579444572
+42,Shewanella oneidensis,Pseudomonas fluorescens,0.8993333333333333,0.9563821349305714
+43,Shewanella oneidensis,Lactobacillus plantarum,0.9246666666666666,0.977469038100387
+44,Shewanella oneidensis,Streptococcus salivarius,0.956,0.992176829615297
+45,Shewanella oneidensis,Bacillus subtilis,0.9556666666666667,0.9892691497837468
+46,Shewanella oneidensis,Agrobacter rhizogenes,0.8386666666666667,0.9048750764710903
+47,Shewanella oneidensis,Micrococcus luteus,0.98,0.9977952317607557
+48,Shewanella oneidensis,Citrobacter freundii,0.9786666666666667,0.9952641275893467
+49,Shewanella oneidensis,Enterobacter aerogenes,0.971,0.9942428828534032
+50,Shewanella oneidensis,Escherichia coli,0.9503333333333334,0.9883323789267017
+51,Shewanella oneidensis,Edwardsialla ictaluri,0.9823333333333333,0.9956953889710904
+52,Shewanella oneidensis,Klebsiella oxytoca,0.987,0.997848361384589
+53,Shewanella oneidensis,Janthinobacterium sp. strain B3,0.9293333333333333,0.978874194385955
+54,Cupriavidus necator,Cupriavidus pinatubonensis,0.8366666666666667,0.9067337241065331
+55,Cupriavidus necator,Zymomonas mobilis subsp. mobilis,0.9246666666666666,0.9743590655588437
+56,Cupriavidus necator,Sphingomonas aromaticivorans,0.9183333333333333,0.9731233016304348
+57,Cupriavidus necator,Rhizobium radiobacter,0.913,0.9577470549738218
+58,Cupriavidus necator,Pseudomonas fluorescens,0.8486666666666667,0.9173787666458001
+59,Cupriavidus necator,Lactobacillus plantarum,0.9443333333333334,0.9821104331464829
+60,Cupriavidus necator,Streptococcus salivarius,0.9106666666666666,0.9741118683132255
+61,Cupriavidus necator,Bacillus subtilis,0.8576666666666667,0.9301750032011153
+62,Cupriavidus necator,Agrobacter rhizogenes,0.8933333333333333,0.945616161364671
+63,Cupriavidus necator,Micrococcus luteus,0.9513333333333334,0.9885951371500113
+64,Cupriavidus necator,Citrobacter freundii,0.9623333333333334,0.9915057068774187
+65,Cupriavidus necator,Enterobacter aerogenes,0.933,0.9790996062628045
+66,Cupriavidus necator,Escherichia coli,0.8956666666666667,0.9558141592448213
+67,Cupriavidus necator,Edwardsialla ictaluri,0.9663333333333334,0.9907527778568178
+68,Cupriavidus necator,Klebsiella oxytoca,0.9433333333333334,0.9812430197900068
+69,Cupriavidus necator,Janthinobacterium sp. strain B3,0.8093333333333333,0.8822296302356021
+70,Cupriavidus pinatubonensis,Zymomonas mobilis subsp. mobilis,0.9636666666666667,0.9927105711501252
+71,Cupriavidus pinatubonensis,Sphingomonas aromaticivorans,0.959,0.9944709623264283
+72,Cupriavidus pinatubonensis,Rhizobium radiobacter,0.9136666666666666,0.9696316405360802
+73,Cupriavidus pinatubonensis,Pseudomonas fluorescens,0.79,0.8597155631117688
+74,Cupriavidus pinatubonensis,Lactobacillus plantarum,0.916,0.9757771152259276
+75,Cupriavidus pinatubonensis,Streptococcus salivarius,0.9633333333333334,0.9935922116862054
+76,Cupriavidus pinatubonensis,Bacillus subtilis,0.902,0.9636473331151832
+77,Cupriavidus pinatubonensis,Agrobacter rhizogenes,0.8786666666666667,0.9411028109350102
+78,Cupriavidus pinatubonensis,Micrococcus luteus,0.966,0.9922553014028
+79,Cupriavidus pinatubonensis,Citrobacter freundii,0.8593333333333333,0.9308979217647393
+80,Cupriavidus pinatubonensis,Enterobacter aerogenes,0.836,0.908510343159572
+81,Cupriavidus pinatubonensis,Escherichia coli,0.727,0.7951701837440246
+82,Cupriavidus pinatubonensis,Edwardsialla ictaluri,0.86,0.9246566359122468
+83,Cupriavidus pinatubonensis,Klebsiella oxytoca,0.8266666666666667,0.8965426175165035
+84,Cupriavidus pinatubonensis,Janthinobacterium sp. strain B3,0.6896666666666667,0.7547309818176644
+85,Zymomonas mobilis subsp. mobilis,Sphingomonas aromaticivorans,0.754,0.8429728403141361
+86,Zymomonas mobilis subsp. mobilis,Rhizobium radiobacter,0.8763333333333333,0.9478807282181879
+87,Zymomonas mobilis subsp. mobilis,Pseudomonas fluorescens,0.9173333333333333,0.9693891115837696
+88,Zymomonas mobilis subsp. mobilis,Lactobacillus plantarum,0.9606666666666667,0.9949053359037104
+89,Zymomonas mobilis subsp. mobilis,Streptococcus salivarius,0.9543333333333334,0.9901739094866834
+90,Zymomonas mobilis subsp. mobilis,Bacillus subtilis,0.9143333333333333,0.968091326044275
+91,Zymomonas mobilis subsp. mobilis,Agrobacter rhizogenes,0.9316666666666666,0.9802760161763032
+92,Zymomonas mobilis subsp. mobilis,Micrococcus luteus,0.9803333333333333,0.9979170519861142
+93,Zymomonas mobilis subsp. mobilis,Citrobacter freundii,0.9896666666666667,0.9981778095122922
+94,Zymomonas mobilis subsp. mobilis,Enterobacter aerogenes,0.983,0.9956238084737081
+95,Zymomonas mobilis subsp. mobilis,Escherichia coli,0.9743333333333334,0.9958743402145458
+96,Zymomonas mobilis subsp. mobilis,Edwardsialla ictaluri,0.9926666666666667,0.9991225831578647
+97,Zymomonas mobilis subsp. mobilis,Klebsiella oxytoca,0.995,0.9985503837781697
+98,Zymomonas mobilis subsp. mobilis,Janthinobacterium sp. strain B3,0.9316666666666666,0.9825036812827224
+99,Sphingomonas aromaticivorans,Rhizobium radiobacter,0.9126666666666666,0.9677507629325062
+100,Sphingomonas aromaticivorans,Pseudomonas fluorescens,0.929,0.9807019423656954
+101,Sphingomonas aromaticivorans,Lactobacillus plantarum,0.967,0.9926203174795128
+102,Sphingomonas aromaticivorans,Streptococcus salivarius,0.9313333333333333,0.9793474704074665
+103,Sphingomonas aromaticivorans,Bacillus subtilis,0.902,0.9621263586956521
+104,Sphingomonas aromaticivorans,Agrobacter rhizogenes,0.946,0.9838203622951286
+105,Sphingomonas aromaticivorans,Micrococcus luteus,0.9496666666666667,0.9894741100899158
+106,Sphingomonas aromaticivorans,Citrobacter freundii,0.9923333333333333,0.9991786026775553
+107,Sphingomonas aromaticivorans,Enterobacter aerogenes,0.9786666666666667,0.9968924727549511
+108,Sphingomonas aromaticivorans,Escherichia coli,0.97,0.9974059850187799
+109,Sphingomonas aromaticivorans,Edwardsialla ictaluri,0.993,0.9995576236341908
+110,Sphingomonas aromaticivorans,Klebsiella oxytoca,0.9923333333333333,0.9983874381117688
+111,Sphingomonas aromaticivorans,Janthinobacterium sp. strain B3,0.934,0.9852330767698612
+112,Rhizobium radiobacter,Pseudomonas fluorescens,0.8153333333333334,0.8940388562058957
+113,Rhizobium radiobacter,Lactobacillus plantarum,0.8673333333333333,0.9401364742203505
+114,Rhizobium radiobacter,Streptococcus salivarius,0.924,0.9750090698269974
+115,Rhizobium radiobacter,Bacillus subtilis,0.928,0.9735318884446849
+116,Rhizobium radiobacter,Agrobacter rhizogenes,0.613,0.6648945677071477
+117,Rhizobium radiobacter,Micrococcus luteus,0.9776666666666667,0.9941641887662189
+118,Rhizobium radiobacter,Citrobacter freundii,0.965,0.992408243583542
+119,Rhizobium radiobacter,Enterobacter aerogenes,0.951,0.9891295455838836
+120,Rhizobium radiobacter,Escherichia coli,0.9256666666666666,0.9760165319826998
+121,Rhizobium radiobacter,Edwardsialla ictaluri,0.9723333333333334,0.9929955593415661
+122,Rhizobium radiobacter,Klebsiella oxytoca,0.9753333333333334,0.9950656139739359
+123,Rhizobium radiobacter,Janthinobacterium sp. strain B3,0.8993333333333333,0.954102229399044
+124,Pseudomonas fluorescens,Lactobacillus plantarum,0.927,0.9760443194428637
+125,Pseudomonas fluorescens,Streptococcus salivarius,0.9533333333333334,0.9883054806652628
+126,Pseudomonas fluorescens,Bacillus subtilis,0.8696666666666667,0.9302608108781014
+127,Pseudomonas fluorescens,Agrobacter rhizogenes,0.7643333333333333,0.8448703903938084
+128,Pseudomonas fluorescens,Micrococcus luteus,0.964,0.9889012438111769
+129,Pseudomonas fluorescens,Citrobacter freundii,0.9393333333333334,0.9801784266162076
+130,Pseudomonas fluorescens,Enterobacter aerogenes,0.92,0.9664607578818577
+131,Pseudomonas fluorescens,Escherichia coli,0.8363333333333334,0.9132882302099932
+132,Pseudomonas fluorescens,Edwardsialla ictaluri,0.951,0.9843305400637377
+133,Pseudomonas fluorescens,Klebsiella oxytoca,0.9416666666666667,0.9850965847655361
+134,Pseudomonas fluorescens,Janthinobacterium sp. strain B3,0.7593333333333333,0.8352408127987707
+135,Lactobacillus plantarum,Streptococcus salivarius,0.7826666666666666,0.8667253389625539
+136,Lactobacillus plantarum,Bacillus subtilis,0.9533333333333334,0.9840311023930116
+137,Lactobacillus plantarum,Agrobacter rhizogenes,0.876,0.9414249231732301
+138,Lactobacillus plantarum,Micrococcus luteus,0.967,0.9911807047433417
+139,Lactobacillus plantarum,Citrobacter freundii,0.9276666666666666,0.9768443759959026
+140,Lactobacillus plantarum,Enterobacter aerogenes,0.919,0.9767999160596403
+141,Lactobacillus plantarum,Escherichia coli,0.914,0.9686548557363988
+142,Lactobacillus plantarum,Edwardsialla ictaluri,0.9276666666666666,0.9741827819115638
+143,Lactobacillus plantarum,Klebsiella oxytoca,0.921,0.9757966775978829
+144,Lactobacillus plantarum,Janthinobacterium sp. strain B3,0.9226666666666666,0.9808517723508992
+145,Streptococcus salivarius,Bacillus subtilis,0.9213333333333333,0.9747116328534031
+146,Streptococcus salivarius,Agrobacter rhizogenes,0.9186666666666666,0.9729025580468927
+147,Streptococcus salivarius,Micrococcus luteus,0.9506666666666667,0.9861742936205327
+148,Streptococcus salivarius,Citrobacter freundii,0.9766666666666667,0.9965205653881174
+149,Streptococcus salivarius,Enterobacter aerogenes,0.9596666666666667,0.9936902458456637
+150,Streptococcus salivarius,Escherichia coli,0.9626666666666667,0.9944473985602094
+151,Streptococcus salivarius,Edwardsialla ictaluri,0.9753333333333334,0.9970400797433417
+152,Streptococcus salivarius,Klebsiella oxytoca,0.9686666666666667,0.9947901846687912
+153,Streptococcus salivarius,Janthinobacterium sp. strain B3,0.9556666666666667,0.9912685131174596
+154,Bacillus subtilis,Agrobacter rhizogenes,0.9143333333333333,0.9671401057079444
+155,Bacillus subtilis,Micrococcus luteus,0.9123333333333333,0.9739151330952652
+156,Bacillus subtilis,Citrobacter freundii,0.939,0.9878724408860687
+157,Bacillus subtilis,Enterobacter aerogenes,0.9373333333333334,0.9845626209310265
+158,Bacillus subtilis,Escherichia coli,0.935,0.9833424179803095
+159,Bacillus subtilis,Edwardsialla ictaluri,0.947,0.9892509212098791
+160,Bacillus subtilis,Klebsiella oxytoca,0.968,0.993546195652174
+161,Bacillus subtilis,Janthinobacterium sp. strain B3,0.8853333333333333,0.9530903212497154
+162,Agrobacter rhizogenes,Micrococcus luteus,0.976,0.9935324130719326
+163,Agrobacter rhizogenes,Citrobacter freundii,0.9503333333333334,0.9867842839460506
+164,Agrobacter rhizogenes,Enterobacter aerogenes,0.9366666666666666,0.982994741278739
+165,Agrobacter rhizogenes,Escherichia coli,0.9066666666666666,0.9629951058502162
+166,Agrobacter rhizogenes,Edwardsialla ictaluri,0.9566666666666667,0.988170544758707
+167,Agrobacter rhizogenes,Klebsiella oxytoca,0.961,0.9919487501422718
+168,Agrobacter rhizogenes,Janthinobacterium sp. strain B3,0.8643333333333333,0.9335106099191895
+169,Micrococcus luteus,Citrobacter freundii,0.966,0.9936569008934668
+170,Micrococcus luteus,Enterobacter aerogenes,0.967,0.993842076527999
+171,Micrococcus luteus,Escherichia coli,0.976,0.9961128677725928
+172,Micrococcus luteus,Edwardsialla ictaluri,0.97,0.9957405158063966
+173,Micrococcus luteus,Klebsiella oxytoca,0.981,0.9967913263999545
+174,Micrococcus luteus,Janthinobacterium sp. strain B3,0.9773333333333334,0.9957116168478262
+175,Citrobacter freundii,Enterobacter aerogenes,0.727,0.7994107724647166
+176,Citrobacter freundii,Escherichia coli,0.7823333333333333,0.8716663939790577
+177,Citrobacter freundii,Edwardsialla ictaluri,0.5646666666666667,0.6021740464232871
+178,Citrobacter freundii,Klebsiella oxytoca,0.8126666666666666,0.8819993277657636
+179,Citrobacter freundii,Janthinobacterium sp. strain B3,0.903,0.9647079248947188
+180,Enterobacter aerogenes,Escherichia coli,0.745,0.8255981195225359
+181,Enterobacter aerogenes,Edwardsialla ictaluri,0.6966666666666667,0.7758023240097882
+182,Enterobacter aerogenes,Klebsiella oxytoca,0.719,0.791168567180742
+183,Enterobacter aerogenes,Janthinobacterium sp. strain B3,0.887,0.9470288758394035
+184,Escherichia coli,Edwardsialla ictaluri,0.7733333333333333,0.8587427797063509
+185,Escherichia coli,Klebsiella oxytoca,0.7116666666666667,0.7878382956550194
+186,Escherichia coli,Janthinobacterium sp. strain B3,0.7876666666666666,0.8580216395401776
+187,Edwardsialla ictaluri,Klebsiella oxytoca,0.7976666666666666,0.8527249050335761
+188,Edwardsialla ictaluri,Janthinobacterium sp. strain B3,0.9163333333333333,0.9613556457005463
+189,Klebsiella oxytoca,Janthinobacterium sp. strain B3,0.8903333333333333,0.9441976670982245

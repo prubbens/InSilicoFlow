@@ -4,6 +4,10 @@ Created on Mon Oct  3 17:37:37 2016
 
 @author: prubbens
 """
+##############################################################################
+###Import packages############################################################
+##############################################################################
+
 
 ''' Imported packages for python ''' 
 import numpy as np
@@ -13,40 +17,31 @@ import pylab as plt
 import itertools
 import warnings
 import time
+from os import listdir
 
 ''' Imported packages from scikit-learn '''
 from sklearn.cross_validation import train_test_split 
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
-from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
 from sklearn import metrics
-from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.ensemble import GradientBoostingClassifier
-from sklearn.ensemble import BaggingClassifier
-from sklearn.ensemble import IsolationForest
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.grid_search import GridSearchCV
 
-from os import listdir
-#from scipy.stats.mstats import chisquare
-#from scipy.stats import ks_2samp
-
+''' Define plotting style, ignore future warnings, start stopwatch '''
 plt.style.use('ggplot') #Plotting style for matplotlib
 warnings.simplefilter(action = "ignore", category = FutureWarning) #Do not display futurewarnings
 start_time = time.time() #Start stopwatch to determine runtime
 
 ##############################################################################
+###Read-in metadata###########################################################
+##############################################################################
 
 ''' Put species names in an excel sheet to later on annotate in silico communities '''
-<<<<<<< HEAD
 path = 'DataInsilicoComm/'
-=======
-path = 'DataInsilicoPopulations/'
->>>>>>> fbb81f7d334d900de71ca37c355eb1ed69cc4d76
 datalist_singlespecies = sorted(listdir(path)) 
 list_species = pd.read_excel('listspecies.xlsx', index_col = 0, header = 0 )
 list_species = list_species.index.tolist()
 
+##############################################################################
+####Functions#################################################################
 ##############################################################################
 
 '''Return number of combinations '''
@@ -78,7 +73,8 @@ def get_subsample_ax_cul_pool(idx, datalist, n_cell, n_rep, species_id):
     df_sampled['species'] = species_id
     return df_sampled
     
-''' Split in silico community into a training and validation/test set '''    
+''' Split in silico community into a training and validation/test set '''
+'Input: dataframe'    
 def get_train_test(df): 
     features = get_features(df)
     x_train, x_test, y_train, y_test = train_test_split(df[features], df['species'], test_size = 0.3, random_state = 26)
@@ -91,18 +87,20 @@ def return_roc_auc_score(y_true, y_scores):
 ''' Calculate accuracy '''
 def return_accuracy_score(y_true, y_pred): 
     return metrics.accuracy_score(y_true, y_pred)
-<<<<<<< HEAD
-        
-=======
-    
->>>>>>> fbb81f7d334d900de71ca37c355eb1ed69cc4d76
-''' Perform LDA '''
+
+''' Train Linear Discriminant analysis on training set and evaluate on test set '''
+'x_train: dataframe training set'
+'y_train: labels of training set'
+'x_test: dataframe test set'
 def perform_lda(x_train, x_test, y_train): 
     lda = LinearDiscriminantAnalysis(solver = 'lsqr')
     lda.fit(x_train, y_train)
     return lda.predict(x_test), lda.predict_proba(x_test)[:,1]
     
-''' Perform Random Forests '''    
+''' Train Random Forest classifier on training set and evaluate on test set '''
+'x_train: dataframe training set'
+'y_train: labels of training set'
+'x_test: dataframe test set'    
 def perform_RF(x_train, x_test, y_train): 
     rf = RandomForestClassifier(n_estimators = 200, criterion = 'gini')
     rf.fit(x_train, y_train)

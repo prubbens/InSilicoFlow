@@ -5,18 +5,34 @@ Created on Tue Mar  8 11:13:05 2016
 @author: prubbens
 """
 
-#import sys
+##############################################################################
+###Import packages############################################################
+##############################################################################
+
+''' Imported packages for python ''' 
 import numpy as np
 import pandas as pd
 import pylab as plt
+import time
+import warnings
+import time
+from os import listdir
+
+''' Imported packages from scikit-learn '''
 from sklearn.cross_validation import train_test_split 
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn import metrics
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.grid_search import GridSearchCV
-#from sklearn import preprocessing
+
+''' Define plotting style, ignore future warnings, start stopwatch '''
 plt.style.use('ggplot')
-from os import listdir
+warnings.simplefilter(action = "ignore", category = FutureWarning) #Do not display futurewarnings
+start_time = time.time() #Start stopwatch to determine runtime
+
+##############################################################################
+###Read-in metadata and define global variables###############################
+##############################################################################
+
 
 '''
 Read-in metadata: 
@@ -24,12 +40,21 @@ This data is our expected outcome concerning the in vitro communities in the abu
 '''
 targetabundances = pd.read_excel('targetabundances.xlsx', index_col = 'File')
 
-'''
-Return path of microbial community of interest: 
-comb == 0: Pseudomonas putida -- Pseudomonas fluorescens (initial low performance)
-comb == 1: Agrobacter rhizogenes -- Janthinobacterium sp. B3 (initial medium performance)
-comb == 2: Shewanella oneidensis -- Micrococcus luteus (initial high performance)
-'''
+''' Global variables'''
+Nax = 5000
+Ncomm = 10000
+invitro_combination = 2 #0: low, 1: medium, 2: high
+
+##############################################################################
+###Functions##################################################################
+##############################################################################
+
+
+''' Return path of microbial community of interest ''' 
+''' Input: '''
+'comb == 0: Pseudomonas putida -- Pseudomonas fluorescens (initial low performance)'
+'comb == 1: Agrobacter rhizogenes -- Janthinobacterium sp. B3 (initial medium performance)'
+'comb == 2: Shewanella oneidensis -- Micrococcus luteus (initial high performance)'
 def get_path(comb): 
     if comb == 0: 
         path_insilico = 'PC_filtered_1_11/' 
@@ -47,9 +72,9 @@ def get_path(comb):
     nrep_invitro = 3
     return path_insilico, nrep_insilico, path_invitro, nrep_invitro
 
-'''
-Get features (FL1-A/H, FL2-A/H, FL3-A/H, FL4-A/H, FSC-A/H, SSC-A/H)
-'''
+''' Filter out features you don't want to use for your classifier '''
+'Input: pandas dataframe'
+'Output: list of features'
 def get_features(df): 
     features = list(df.columns)
     if(len(features) == 15): 
@@ -58,13 +83,11 @@ def get_features(df):
     features.remove('Width')
     return features    
     
-''' 
-Return in silico community containing two bacterial populations: 
-datalist: list of filenames containing individual bacterial populations
-n_subsample: number of cells to sample per bacterial population
-path: path to directory
-nrep: number of replicates
-'''    
+''' Return in silico community containing two bacterial populations '''
+'datalist: list of filenames containing individual bacterial populations'
+'n_subsample: number of cells to sample per bacterial population'
+'path: path to directory'
+'nrep: number of replicates'
 def get_insilico_comm(datalist, n_subsample, path, nrep): 
     df0 = pd.DataFrame()
     df1 = pd.DataFrame()
@@ -81,13 +104,12 @@ def get_insilico_comm(datalist, n_subsample, path, nrep):
     df = pd.concat([df0, df1], axis = 0, ignore_index = True)
     return df
 
-''' 
-Return in silico community containing two bacterial populations: 
-datalist: list of filenames containing individual bacterial populations
-n_sample: number of cells to sample per bacterial population
-path: path to directory
-nrep: number of replicates
-''' 
+''' Return in silico community containing two bacterial populations in varying abundances '''
+'datalist: list of filenames containing individual bacterial populations'
+'n_sample: number of cells to sample per bacterial population'
+'abun: relative abundance (between 0 and 1) of first bacterial population'
+'path: path to directory'
+'nrep: number of replicates'
 def get_insilico_comm_abun(datalist, n_sample, abun, path, nrep): 
     df0 = pd.DataFrame()
     df1 = pd.DataFrame()
@@ -104,14 +126,12 @@ def get_insilico_comm_abun(datalist, n_sample, abun, path, nrep):
     df = pd.concat([df0, df1], axis = 0, ignore_index = True)
     return df
     
-''' 
-Sample cells of synthetic bacterial community 
-idx: 0 or 1 (first or second bacterial population)
-datalist: list of filenames containing synthetic communities
-n_sample: number of cells to sample per invitro community
-path: path to directory
-nrep: number of replicates
-''' 
+''' Sample cells of synthetic bacterial community '''
+'idx: 0 or 1 (first or second bacterial population)'
+'datalist: list of filenames containing synthetic communities'
+'n_sample: number of cells to sample per invitro community'
+'path: path to directory'
+'nrep: number of replicates'
 def get_invitro_comm(idx, datalist, n_sample, path, nrep): 
     df = pd.DataFrame()
     for i in np.arange(int(idx*nrep), int((idx+1)*nrep)): 
@@ -121,11 +141,9 @@ def get_invitro_comm(idx, datalist, n_sample, path, nrep):
         df = df.sample(n_sample, random_state = 5495, replace = False)
     return df
     
-''' 
-Calculate relative abundance p and alpha diversity parameters D1 and D2 
-cluster: array of cell labels
-n_clust: number of different 
-'''
+''' Calculate relative abundance p and alpha diversity parameters D1 and D2 ''' 
+'cluster: array of (predicted) cell labels'
+'n_clust: number of different clusters'
 def calc_D1_D2(cluster, n_clust):
     cluster = pd.DataFrame(cluster)
     cluster.columns = ['clust']
@@ -143,17 +161,16 @@ def calc_D1_D2(cluster, n_clust):
     return pp, np.exp(-1.*p_d1), 1./p_d2 
 
 ''' Split in silico community into a training and validation/test set '''    
+'Input: dataframe'
 def get_train_test(df): 
     features = list(df.columns)
     art_x_train, art_x_test, art_y_train, art_y_test = train_test_split(df[features[0:12]], df['species'], test_size = 0.3, random_state = 588)
     return art_x_train, art_x_test, art_y_train, art_y_test
     
-''' 
-Train Linear Discriminant analysis on training set and evaluate on test set: 
-x_train: training set
-y_train: labels of training set
-x_test: test
-'''
+''' Train Linear Discriminant analysis on training set and evaluate on test set '''
+'x_train: dataframe training set'
+'y_train: labels of training set'
+'x_test: dataframe test set'
 def perform_lda(x_train, x_test, y_train): 
     lda = LinearDiscriminantAnalysis(solver = 'lsqr')
     lda.fit(x_train, y_train)
@@ -165,6 +182,9 @@ def perform_lda_dimred(x_train, x_test, y_train):
     lda.fit(x_train, y_train)
     return lda.transform(x_test)
     
+''' Plot feature importances from Random Forest classifier '''
+'features: list of features' 
+'feature importances: RF.feature_importances_'
 def plot_feature_importances(features, feature_importances): 
     df = pd.DataFrame(feature_importances, index = features)
     df.sort(axis = 1, ascending = False, inplace = True)
@@ -179,41 +199,50 @@ def plot_feature_importances(features, feature_importances):
     #plt.show()
     plt.savefig('RF_featureimportances_2Species_3.png')
     
-def tune_RF(x_train, y_train): 
-    features = list(x_train.columns)
-    param_grid = [{'max_features': np.arange(1,len(features))}, {'criterion': ['gini', 'entropy']}]
-    clf_rf = GridSearchCV(RandomForestClassifier(n_estimators = 200), param_grid, cv = 10)
-    clf_rf.fit(x_train, y_train)
-    grid_scores = clf_rf.grid_scores_
-    best_params = clf_rf.best_params_    
-    return grid_scores, best_params
-
+''' Train using Linear Discriminant Analysis on training set and return classifier '''
+'x_train: dataframe training set'
+'y_train: labels of training set'
 def return_lda_class(x_train, y_train):
     lda = LinearDiscriminantAnalysis(solver = 'svd')
     lda.fit(x_train, y_train)
     return lda
-    
+
+''' Train Random Forest classifier on training set and return classifier '''
+'x_train: dataframe training set'
+'y_train: labels of training set'
 def return_RF_class(x_train, y_train):
     rf = RandomForestClassifier(n_estimators = 200, criterion = 'gini', random_state = 6)
     rf.fit(x_train, y_train)
     return rf
     
+''' Train Linear Discriminant analysis on training set and evaluate (labels) on test set '''
+'x_train: dataframe training set'
+'y_train: labels of training set'
+'x_test: dataframe test set'
 def perform_RF(x_train, x_test, y_train): 
-    #features = list(x_train.columns)
     rf = RandomForestClassifier(n_estimators = 200, criterion = 'gini', random_state=3)
     rf.fit(x_train, y_train)
     #plot_feature_importances(features, rf.feature_importances_)
-    return rf.predict(x_test), rf.predict_proba(x_test)[:,1]
-    
+    return rf.predict(x_test)
+
+''' Train Linear Discriminant analysis on training set and evaluate (probabilities) on test set '''
+'x_train: dataframe training set'
+'y_train: labels of training set'
+'x_test: dataframe test set'
 def perform_RF_scores(x_train, x_test, y_train): 
-    #features = list(x_train.columns)
     rf = RandomForestClassifier(n_estimators = 200, criterion='gini', random_state=3)
     rf.fit(x_train, y_train)
     #std_fi = np.std([tree.feature_importances_ for tree in rf.estimators_], axis=0)
     #plot_feature_importances(features, rf.feature_importances_, std_fi)
     return rf.predict_proba(x_test)[:,1]
 
-def perform_insilico_analysis(datalist_insilico, Nax, path_insilico, nrep_insilico): 
+''' Create in silico abundance gradient and analyze it using classifier trained on initial in silico community '''
+'datalist: list of filenames containing individual bacterial populations'
+'Nax: number of cells to sample per population in in silico community'
+'Nabun: total number of cells to sample for in silico communities making up an abundance gradient'
+'path_insilico: path to directory containing in silico communities'
+'nrep_insilico: number of replictates'
+def perform_insilico_analysis(datalist_insilico, Nax, Nabun, path_insilico, nrep_insilico): 
     df_insilico = get_insilico_comm(datalist_insilico, Nax, path_insilico, nrep_insilico)
     features = get_features(df_insilico)
     features = get_features(df_insilico)
@@ -225,7 +254,7 @@ def perform_insilico_analysis(datalist_insilico, Nax, path_insilico, nrep_insili
     D2 = np.zeros(noc)
     dummy = 0
     for pct in percentages: 
-        df_insilico_abun = get_insilico_comm_abun(datalist_insilico, Nax, pct, path_insilico, nrep_insilico)
+        df_insilico_abun = get_insilico_comm_abun(datalist_insilico, Nabun, pct, path_insilico, nrep_insilico)
         pred = clf.predict(df_insilico_abun[features])
         p[dummy], D1[dummy], D2[dummy] = calc_D1_D2(pred, 2)
         dfresult = pd.DataFrame(percentages, columns = ['Theoretical Abundances'])
@@ -237,7 +266,17 @@ def perform_insilico_analysis(datalist_insilico, Nax, path_insilico, nrep_insili
     dfresult.to_csv('dfinsilico_abun.csv')
     return dfresult
 
-        
+''' Create in silico abundance gradient and analyze it using classifier trained on initial in silico community '''
+'datalist_insilico: list of filenames containing individual bacterial populations'
+'datalist_invitro: list of filenames containing synthetic bacterial communities in varying abundances'
+'Nax: number of cells to sample per population in in silico community'
+'Ninvitro: total number of cells to sample for in vitro communities making up an abundance gradient'
+'path_insilico: path to directory containing in silico communities'
+'path_invitro: path to directory containing in silico communities'
+'nrep_insilico: number of replictates of individual bacterial populations'
+'nrep_invitro: number of replictates of in vitro communities'  
+'noc: number of communities making up an abundance gradient (13 in the paper)'
+'targetabundances: metadata containing outcome (in vitro created) abundances'
 def perform_invitro_analysis(datalist_insilico, datalist_invitro, Nax, Ninvitro, path_insilico, path_invitro, nrep_insilico, nrep_invitro, noc, targetabundances): 
     df_insilico = get_insilico_comm(datalist_insilico, Nax, path_insilico, nrep_insilico)
     features = get_features(df_insilico)
@@ -253,21 +292,23 @@ def perform_invitro_analysis(datalist_insilico, datalist_invitro, Nax, Ninvitro,
         p[i], D1[i], D2[i] = calc_D1_D2(pred, 2)
         N[i] = df_invitro.shape[0]
     dfresult = pd.DataFrame(theor_abundances, columns = ['Theoretical Abundances'])
+    dfresult['p0'] = p
     dfresult['D1'] = D1
     dfresult['D2'] = D2
     dfresult['N'] = N
-    dfresult['p0'] = p
     dfresult.sort(columns='Theoretical Abundances', inplace=True)
     dfresult['Target abundances'] = targetabundances
     dfresult.to_csv('dfinvitro.csv')
     return dfresult
 
-Nax = 5000
-Ncomm = 10000
-invitro_combination = 2 #0: low, 1: medium, 2: high
+##############################################################################
+###Call functions#############################################################
+##############################################################################
+
+
 path_insilico, nrep_insilico, path_invitro, nrep_invitro = get_path(invitro_combination)
 datalist_insilico = sorted(listdir(path_insilico))
 datalist_invitro = sorted(listdir(path_invitro))
 noc = int(len(datalist_invitro)/nrep_invitro)
-df_result_insilico = perform_insilico_analysis(datalist_insilico, Ncomm, path_insilico, nrep_insilico)
+df_result_insilico = perform_insilico_analysis(datalist_insilico, Nax, Ncomm, path_insilico, nrep_insilico)
 df_result_invitro = perform_invitro_analysis(datalist_insilico, datalist_invitro, Nax, Ncomm, path_insilico, path_invitro, nrep_insilico, nrep_invitro, noc, targetabundances.iloc[:,2*invitro_combination].values)
