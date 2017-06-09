@@ -25,8 +25,8 @@ Script used to retrieve the composition of a synthetic bacterial community. It m
 - Evaluate performance by retrieving community composition for various in silico/in vitro communities. 
 
 ## Data availability
-Our data will be made available in .fcs-format on the [flowRepository](https://flowrepository.org/), 
-using the identifiers FR-FCM-XXXX and FR-FCM-XXXX. It has been preprocessed following the robust digital gating strategy by [Prest et al. (2013)](http://www.sciencedirect.com/science/article/pii/S0043135413008361). 
+Our data can be found in .csv-format on this repo. Additionally, our data is made available in .fcs-format on the [flowRepository](https://flowrepository.org/), 
+using the identifiers FR-FCM-ZZSH (axenic cultures) and FR-FCM-ZZSG. It has been preprocessed following the robust digital gating strategy by [Prest et al. (2013)](http://www.sciencedirect.com/science/article/pii/S0043135413008361). 
 
 ## fcstocsv.py
-The output of the data still comes in .fcs-format; therefore the data first needs to be transformed to a .csv-format; fcstocsv.py takes care of that. It makes use of [fcsparser](https://github.com/eyurtsev/fcsparser).  
+If one wants to start from the raw .fcs-files, it can be transformed to .csv-format using fcstocsv.py; therefore the data first needs to be transformed to a .csv-format; fcstocsv.py takes care of that. It makes use of [fcsparser](https://github.com/eyurtsev/fcsparser).  
