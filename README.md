@@ -1,6 +1,7 @@
 # Overview
 
 This repository contains the code and data that is used to automatically identify the taxonomy of bacterial single-cells based on flow cytometry. If you find the research and/or data useful, please consider citing: 
+
 Rubbens, P., Props, R., Boon, N., Waegeman, W. (2017). [Flow Cytometric Single-Cell Identification of Populations in Synthetic Bacterial Communities](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0169754).  
 *PLOS ONE* **12**(1):e0169754.
 ## Dependencies
